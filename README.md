@@ -84,8 +84,8 @@
 
 ####三、秀截图
 
-[!pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/1.jpg)
+[!pic](http://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/1.jpg)
 
-[!pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/2.jpg)
+[!pic](http://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/2.jpg)
 
 这里是list_reverse_print 是反向输出哟~所以结果就是这样
