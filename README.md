@@ -1,6 +1,6 @@
 # Mooc_complier
 
-----
+
 
 
 保健哥Mooc上的课程 具体戳：[Mooc_编译原理_华保健](http://mooc.study.163.com/learn/USTC-1000002001#/learn/announce)
@@ -28,13 +28,15 @@
 
 语法：
 
-整形常量  int 
-加运算   
+- 整形常量  int 
 
-汇编代码：
+- 加运算   +
 
-    push a
-    add
+可用汇编代码：
+
+- push a
+
+- add
 
 一个简单的实例是：
 
@@ -72,6 +74,7 @@
 对于上述例子2+3+4，就是生成汇编代码的时候，只需要一条 
 
     push 9
+    
 
 就可以了
 
@@ -79,3 +82,10 @@
 
 具体代码见：complier_bjhua_hw1.c 
 
+####三、秀截图
+
+[!pic](../pic/lab1/1.jpg)
+
+[!pic](../pic/lab1/2.jpg)
+
+这里是list_reverse_print 是反向输出哟~所以结果就是这样
