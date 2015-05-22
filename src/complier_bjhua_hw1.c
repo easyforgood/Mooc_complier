@@ -127,15 +127,16 @@ void List_reverse_print (struct List_t *list)
       return;
   }
   else{
-      switch(list->instr->kind){
-          case STACK_ADD:
-              printf("add\n");break;
-          case STACK_PUSH:
-              printf("push %d\n",((struct Stack_Push *)(list->instr))->i);
-              break;
-      }
       List_reverse_print(list->next);
   }
+  switch(list->instr->kind){
+      case STACK_ADD:
+         printf("add\n");break;
+      case STACK_PUSH:
+         printf("push %d\n",((struct Stack_Push *)(list->instr))->i);
+         break;
+  }
+  
 }
  
 //////////////////////////////////////////////////
@@ -166,10 +167,10 @@ void compile (struct Exp_t *exp)
     struct Exp_Sum *p=(struct Exp_Sum *)exp;
     compile(p->left);
     compile(p->right);
-    int a=pop();
-    int b=pop();
-    emit(Stack_Push_new(a+b));
-    //emit(Stack_Add_new());  //if you dont want to use Constant folding
+    //int a=pop();
+    //int b=pop();
+    //emit(Stack_Push_new(a+b));
+    emit(Stack_Add_new());  //if you dont want to use Constant folding
     break;
   }
   default:
