@@ -131,7 +131,7 @@ void compile (struct Exp_t *exp)
 
 - compile() Constant Folding
 
-``` 
+``` c
 int pop(){
     struct Stack_Push * p=(struct Stack_Push *)(all->instr);
     all=all->next;
@@ -162,6 +162,7 @@ void compile (struct Exp_t *exp)
 }
 ```
 这里附加了一个int pop()函数，用于弹出栈顶的元素。
+相加计算结果之后再push
 
 
 
