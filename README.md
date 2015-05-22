@@ -84,9 +84,9 @@
 
 ####三、秀截图
 
-![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/3.jpg)
+![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/1.jpg)
 
-![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/2.jpg)
+![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/3.jpg)
 
 逆序输出意思是按照执行顺序输出！
 
