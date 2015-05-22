@@ -166,7 +166,7 @@ void compile (struct Exp_t *exp)
 
 
 
-具体代码见：src/complier_bjhua_hw1.c 
+具体代码见：[src/complier_bjhua_hw1.c](https://github.com/easyforgood/Mooc_complier/blob/master/src/complier_bjhua_hw1.c) 
 
 ####三、秀截图
 
