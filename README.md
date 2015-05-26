@@ -78,14 +78,101 @@
 
 就可以了
 
-在实现的时候写了一个pop()函数。作用是 弹出栈之前放的int。
+- List_reverse_print 实现
 
-具体代码见：complier_bjhua_hw1.c 
+``` c
+//TODO
+void List_reverse_print (struct List_t *list)
+{
+  //TODO();
+  if(list==NULL){
+      return;
+  }
+  else{
+      List_reverse_print(list->next);
+  }
+  switch(list->instr->kind){
+      case STACK_ADD:
+         printf("add\n");break;
+      case STACK_PUSH:
+         printf("push %d\n",((struct Stack_Push *)(list->instr))->i);
+         break;
+  }
+  
+}
+```
+
+这是逆序输出。所以是**先遍历，再输出**，利用递归的特性
+
+- compile() No Constant Folding
+
+``` c
+void compile (struct Exp_t *exp)
+{
+  switch (exp->kind){
+  case EXP_INT:{
+    struct Exp_Int *p = (struct Exp_Int *)exp;
+    emit (Stack_Push_new (p->i));
+    break;
+  }
+  case EXP_SUM:{
+    //TODO()
+    struct Exp_Sum *p=(struct Exp_Sum *)exp;
+    compile(p->left);
+    compile(p->right);
+    emit(Stack_Add_new());  //if you dont want to use Constant folding
+    break;
+  }
+  default:
+    break;
+  }
+}
+```
+
+- compile() Constant Folding
+
+``` c
+int pop(){
+    struct Stack_Push * p=(struct Stack_Push *)(all->instr);
+    all=all->next;
+    return p->i;
+}
+
+void compile (struct Exp_t *exp)
+{
+  switch (exp->kind){
+  case EXP_INT:{
+    struct Exp_Int *p = (struct Exp_Int *)exp;
+    emit (Stack_Push_new (p->i));
+    break;
+  }
+  case EXP_SUM:{
+    //TODO()
+    struct Exp_Sum *p=(struct Exp_Sum *)exp;
+    compile(p->left);
+    compile(p->right);
+    int a=pop();
+    int b=pop();
+    emit(Stack_Push_new(a+b));
+    break;
+  }
+  default:
+    break;
+  }
+}
+```
+这里附加了一个int pop()函数，用于弹出栈顶的元素。
+相加计算结果之后再push
+
+
+
+具体代码见：[src/complier_bjhua_hw1.c](https://github.com/easyforgood/Mooc_complier/blob/master/src/complier_bjhua_hw1.c) 
 
 ####三、秀截图
 
 ![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/1.jpg)
 
-![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/2.jpg)
+![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab1/3.jpg)
 
-这里是list_reverse_print 是反向输出哟~所以结果就是这样
+逆序输出意思是按照执行顺序输出！
+
