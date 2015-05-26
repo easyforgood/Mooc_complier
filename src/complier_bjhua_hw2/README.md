@@ -47,7 +47,7 @@
 - 读取整型数
 
 
-![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab2/lab3.jpg)
+![pic](https://raw.githubusercontent.com/easyforgood/Mooc_complier/master/pic/lab2/3.jpg)
 
 实际上是一个NFA。
 
