@@ -27,7 +27,7 @@ int nowPos=0; //文件指针现在的位置 = ftell(fp)
 int state=0;
 //print IF
 void printIF(){
-    printf("IF(%d,%d)\n",line,linePos);
+    printf("IF(%d,%d)\n",line,linePos+startPos-nowPos);
     nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
@@ -38,7 +38,8 @@ void printID(){
     fseek(fp,startPos-tempPos,SEEK_CUR);
     char *s=(char *)malloc(sizeof(char)*(nowPos-startPos));
     fread(s,sizeof(char),nowPos-startPos,fp);
-    printf("ID(%s)(%d,%d)\n",s,line,linePos);
+    printf("ID(%s)(%d,%d)\n",s,line,linePos+startPos-nowPos);
+    fgetc(fp);
     nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
@@ -49,7 +50,8 @@ void printINT(){
     fseek(fp,startPos-tempPos,SEEK_CUR);
     char *s=(char *)malloc(sizeof(char)*(nowPos-startPos));
     fread(s,sizeof(char),nowPos-startPos,fp);     
-    printf("NUM(%s)(%d,%d)\n",s,line,linePos);
+    printf("NUM(%s)(%d,%d)\n",s,line,linePos+startPos-nowPos);
+    fgetc(fp);
     nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
@@ -130,12 +132,13 @@ void main(int argc,char *argv[]) //命令行参数
     ch=fgetc(fp); 
     while(ch!=EOF) 
     {
+      
+        lexer(ch);
         linePos++;
         if (ch == '\n'){
             line++;
             linePos=1;
         }
-        lexer(ch);
         ch=fgetc(fp);
     } 
     lexer(' ');
