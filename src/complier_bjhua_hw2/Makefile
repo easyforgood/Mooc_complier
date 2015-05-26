@@ -4,6 +4,7 @@
 
 CC_PTHREAD_FLAGS			 = -lpthread
 CC_FLAGS                     = -c 
+DEBUG						 = -g
 CC_OUTPUT_FLAGS				 = -o
 CC                           = gcc
 RM                           = rm
@@ -13,7 +14,7 @@ TARGET  =	main
 OBJS    =   main.c
 
 all:
-	$(CC) $(OBJS) $(CC_OUTPUT_FLAGS) $(TARGET)  
+	$(CC) $(DEBUG) $(OBJS) $(CC_OUTPUT_FLAGS) $(TARGET)  
 
 clean:
 	   rm main,main~ 

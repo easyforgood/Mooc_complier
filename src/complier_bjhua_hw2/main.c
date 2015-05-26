@@ -1,35 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define FILENAME "testfile"
+
+FILE *fp;
 int line=1;
+int linePos=1;
 int startPos=0;
 int nowPos=0;
 //0 1 2 3 4 
 int state=0;
-void rollback(){
-
-}
-void lexerCh(int ch){
-
-}
 void printIF(){
-    printf("IF\t(%d,%d)",line,startPos);
+    printf("IF(%d,%d)\n",line,linePos);
+    nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
 }
 void printID(){
-    char *s = "test";
-    printf("ID(%s)\t(%d,%d)",s,line,startPos);
+    int tempPos=ftell(fp);
+    fseek(fp,startPos-tempPos,SEEK_CUR);
+    char *s=(char *)malloc(sizeof(char)*(nowPos-startPos));
+    fread(s,sizeof(char),nowPos-startPos,fp);
+    printf("ID(%s)(%d,%d)\n",s,line,linePos);
+    nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
 }
 void printINT(){
-     
-    char *s="test";
-    printf("INT(%s)\t(%d,%d)",s,line,startPos);
+     int tempPos=ftell(fp);
+    fseek(fp,startPos-tempPos,SEEK_CUR);
+    char *s=(char *)malloc(sizeof(char)*(nowPos-startPos));
+    fread(s,sizeof(char),nowPos-startPos,fp);     
+    printf("INT(%s)(%d,%d)\n",s,line,linePos);
+    nowPos=ftell(fp);
     startPos=nowPos;
     state=0;
 }
+
 
 void lexer(int ch){
     switch(state){
@@ -40,8 +46,11 @@ void lexer(int ch){
             else if (ch>='0' && ch <= '9'){
                 state=2;
             }
-            else if ((ch>='a'&&ch<='Z')||ch=='_'){
+            else if ((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||ch=='_'){
                 state=3;
+            }
+            else{
+                startPos++;
             }
             break;
         case 1:
@@ -76,13 +85,12 @@ void lexer(int ch){
         default:break;
 
     }
-    nowPos++;
+    nowPos=ftell(fp);
 
 }
 void main(int argc,char *argv[]) //命令行参数
 {
     int ch;
-    FILE *fp;
     char *filename=FILENAME;
     if(argc==2)
     {
@@ -99,8 +107,12 @@ void main(int argc,char *argv[]) //命令行参数
     ch=fgetc(fp); 
     while(ch!=EOF) 
     {
+        linePos++;
+        if (ch == '\n'){
+            line++;
+            linePos=1;
+        }
         lexer(ch);
-        putchar(ch);
         ch=fgetc(fp);
     } 
     lexer(' ');
